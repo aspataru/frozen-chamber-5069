@@ -1,3 +1,2 @@
-- mvn exec & package
-- allow heroku configuration (PORT)
-- run on heroku
+- add spring
+- some weather service
