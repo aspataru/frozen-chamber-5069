@@ -4,50 +4,38 @@
 	<groupId>com.parapi</groupId>
 	<artifactId>parapi-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<properties>
 		<mvn.compile.source.version>1.8</mvn.compile.source.version>
 		<mvn.compile.target.version>1.8</mvn.compile.target.version>
 		<jetty.version>9.3.6.v20151106</jetty.version>
 		<jersey.version>2.22.1</jersey.version>
+		<spring.version>4.2.3.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
+
+		<!-- Spring -->
 		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>${jetty.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-servlet</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-util</artifactId>
-			<version>${jetty.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.core</groupId>
-			<artifactId>jersey-server</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
+
+		<!-- Jersey -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-servlet-core</artifactId>
+			<artifactId>jersey-container-servlet</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-jetty-http</artifactId>
+			<groupId>org.glassfish.jersey.ext</groupId>
+			<artifactId>jersey-spring3</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-moxy</artifactId>
-			<version>${jersey.version}</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -61,49 +49,84 @@
 					<target>${mvn.compile.target.version}</target>
 				</configuration>
 			</plugin>
+
 			<plugin>
-				<!-- NOTE: We don't need a groupId specification because the group is 
-					org.apache.maven.plugins ...which is assumed by default. -->
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.6</version>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<mainClass>app.App</mainClass>
-						</manifest>
-					</archive>
+					<!-- <scanIntervalSeconds>10</scanIntervalSeconds> -->
+					<webApp>
+						<contextPath>/</contextPath>
+					</webApp>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
 				<executions>
 					<execution>
-						<id>make-assembly</id> <!-- this is used for inheritance merges -->
-						<phase>package</phase> <!-- bind to the packaging phase -->
+						<phase>package</phase>
 						<goals>
-							<goal>single</goal>
+							<goal>copy</goal>
 						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.eclipse.jetty</groupId>
+									<artifactId>jetty-runner</artifactId>
+									<version>${jetty.version}</version>
+									<destFileName>jetty-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<configuration>
-					<executable>/home/secre/software/java-8/bin/java</executable>
-					<arguments>
-						<argument>-classpath</argument>
-						<!-- automatically creates the classpath using all project dependencies, 
-							also adding the project build directory -->
-						<classpath />
-						<argument>app.App</argument>
-					</arguments>
-					<environmentVariables>
-						<PORT>8080</PORT>
-					</environmentVariables>
-				</configuration>
-			</plugin>
+
+			<!-- assembly -->
+			<!-- <plugin> -->
+			<!-- <artifactId>maven-assembly-plugin</artifactId> -->
+			<!-- <version>2.6</version> -->
+			<!-- <configuration> -->
+			<!-- <descriptorRefs> -->
+			<!-- <descriptorRef>jar-with-dependencies</descriptorRef> -->
+			<!-- </descriptorRefs> -->
+			<!-- <archive> -->
+			<!-- <manifest> -->
+			<!-- <mainClass>app.App</mainClass> -->
+			<!-- </manifest> -->
+			<!-- </archive> -->
+			<!-- </configuration> -->
+			<!-- <executions> -->
+			<!-- <execution> -->
+			<!-- <id>make-assembly</id> this is used for inheritance merges -->
+			<!-- <phase>package</phase> bind to the packaging phase -->
+			<!-- <goals> -->
+			<!-- <goal>single</goal> -->
+			<!-- </goals> -->
+			<!-- </execution> -->
+			<!-- </executions> -->
+			<!-- </plugin> -->
+
+			<!-- mvn exec -->
+			<!-- <plugin> -->
+			<!-- <groupId>org.codehaus.mojo</groupId> -->
+			<!-- <artifactId>exec-maven-plugin</artifactId> -->
+			<!-- <version>1.4.0</version> -->
+			<!-- <configuration> -->
+			<!-- <executable>/home/secre/software/java-8/bin/java</executable> -->
+			<!-- <arguments> -->
+			<!-- <argument>-classpath</argument> -->
+			<!-- <classpath /> -->
+			<!-- <argument>app.App</argument> -->
+			<!-- </arguments> -->
+			<!-- <environmentVariables> -->
+			<!-- <PORT>8080</PORT> -->
+			<!-- </environmentVariables> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 		</plugins>
 	</build>
 
