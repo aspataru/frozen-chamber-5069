@@ -27,6 +27,8 @@ public class UploadFileService {
 	@Path("/download")
 	@Produces("image/jpeg")
 	public Response getFile() {
+		
+		//TODO be polite when there is no file
 
 		File file = new File(FILE_PATH);
 
