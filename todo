@@ -1,2 +1,2 @@
-- photo service to upload
+- refactor posting daemon into separate module
 - some weather service

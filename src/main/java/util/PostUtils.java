@@ -14,6 +14,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 public class PostUtils {
 
 	public static String post(/* String url, File f, String formName */File f) {
+		try {
 		FormDataMultiPart form = new FormDataMultiPart().field("file", f, MediaType.MULTIPART_FORM_DATA_TYPE);
 
 		Client client = ClientBuilder.newBuilder().register(MultiPartFeature.class).build();
@@ -23,6 +24,10 @@ public class PostUtils {
 				.post(Entity.entity(form, MediaType.MULTIPART_FORM_DATA_TYPE));
 
 		return entity.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 
 	}
 }

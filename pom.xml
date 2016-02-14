@@ -130,22 +130,22 @@
 			<!-- </plugin> -->
 
 			<!-- mvn exec -->
-			<!-- <plugin> -->
-			<!-- <groupId>org.codehaus.mojo</groupId> -->
-			<!-- <artifactId>exec-maven-plugin</artifactId> -->
-			<!-- <version>1.4.0</version> -->
-			<!-- <configuration> -->
-			<!-- <executable>/home/secre/software/java-8/bin/java</executable> -->
-			<!-- <arguments> -->
-			<!-- <argument>-classpath</argument> -->
-			<!-- <classpath /> -->
-			<!-- <argument>app.App</argument> -->
-			<!-- </arguments> -->
-			<!-- <environmentVariables> -->
-			<!-- <PORT>8080</PORT> -->
-			<!-- </environmentVariables> -->
-			<!-- </configuration> -->
-			<!-- </plugin> -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<configuration>
+					<executable>/home/secre/software/java-8/bin/java</executable>
+					<arguments>
+						<argument>-classpath</argument>
+						<classpath />
+						<argument>app.ImagePostingDaemon</argument>
+					</arguments>
+					<environmentVariables>
+						<PORT>8080</PORT>
+					</environmentVariables>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

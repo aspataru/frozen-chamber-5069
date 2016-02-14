@@ -15,5 +15,5 @@ function updateImage() {
 	var img = $("<img />").attr('id', 'img').attr('src', noCacheImageLocation);
 	$("#img").replaceWith(img);
 	
-	setTimeout(updateImage, 1000);
+	setTimeout(updateImage, 3000);
 }
