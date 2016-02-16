@@ -6,7 +6,7 @@ import java.io.IOException;
 public class CommandExecutingFileProvidingService implements FileProvidingService {
 
 	private static final String PATH = "/tmp/pi.jpg";
-	private static final String COMMAND_BASE = "raspistill -n -w 640 -h 480 -q 100 -o ";
+	private static final String COMMAND_BASE = "raspistill -t 1 -n -w 640 -h 480 -q 100 -o ";
 
 	private static final String COMMAND;
 
