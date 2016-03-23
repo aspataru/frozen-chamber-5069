@@ -5,6 +5,7 @@ import time
 import picamera
 import requests
 import logging
+import sys
 
 w = 640
 h = 480
@@ -31,9 +32,12 @@ with picamera.PiCamera() as camera:
         files = {'file': open(filename,'rb')}
         
         logging.info(iteration_string + "posting image " + filename)
-        r = requests.post(url, files=files)
-        logging.info(iteration_string + "status = " + `r.status_code`
+        try:
+            r = requests.post(url, files=files)
+            logging.info(iteration_string + "status = " + `r.status_code`
                      + " text= " + r.text)
+        except:
+            logging.error(sys.exc_info()[0])
 
         n += 1
         
