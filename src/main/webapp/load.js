@@ -21,5 +21,5 @@ function refresh() {
     var noCacheImageLocation = imageLocation + "?" + new Date().getTime();
     image.src = noCacheImageLocation;
     
-    setTimeout(refresh, 500);
+    setTimeout(refresh, 1000);
 }
