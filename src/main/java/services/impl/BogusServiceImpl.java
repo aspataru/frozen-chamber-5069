@@ -1,4 +1,6 @@
-package services;
+package services.impl;
+
+import services.BogusService;
 
 public class BogusServiceImpl implements BogusService {
 

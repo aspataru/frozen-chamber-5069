@@ -1,13 +1,10 @@
-package app;
+package legacy;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.RequiredArgsConstructor;
-import services.CommandExecutingFileProvidingService;
-import services.FileProvidingService;
-import services.SimpleFileProvidingService;
 import util.PostUtils;
 
 @RequiredArgsConstructor

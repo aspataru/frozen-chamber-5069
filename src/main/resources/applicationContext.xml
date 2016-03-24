@@ -11,7 +11,7 @@
 
 	<bean class="resources.Status"/>
 	
-	<bean class="services.BogusServiceImpl"/>
+	<bean class="services.impl.BogusServiceImpl"/>
 
 <!--     <bean class="org.glassfish.jersey.examples.helloworld.spring.DateTimeService" scope="request"/> -->
 
