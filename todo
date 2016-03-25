@@ -1,2 +1,10 @@
-- refactor posting daemon into separate module
-- some weather service
+TODO
+- mongoDB to store images on/off
+
+
+HEROKU
+---------------------------------
+heroku open
+git push heroku master
+heroku addons:docs mongolab
+heroku config | grep MONGOLAB_URI

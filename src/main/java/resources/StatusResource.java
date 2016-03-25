@@ -7,19 +7,19 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import services.BogusService;
+import services.StatusService;
 
 @Path("/")
-public class Status {
-	
+public class StatusResource {
+
 	@Autowired
-	private BogusService service;
-	
-    @GET
-    @Path("status")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String test() {
-        return service.sayBogus();
-    }
+	private StatusService service;
+
+	@GET
+	@Path("status")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String test() {
+		return service.getStatus();
+	}
 
 }

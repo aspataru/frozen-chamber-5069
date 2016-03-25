@@ -9,9 +9,10 @@
   http://www.springframework.org/schema/context/spring-context.xsd"
         >
 
-	<bean class="resources.Status"/>
 	
-	<bean class="services.impl.BogusServiceImpl"/>
+	<bean class="services.StatusServiceImpl"/>
+	
+	<bean class="services.ImageServiceImpl"/>
 
 <!--     <bean class="org.glassfish.jersey.examples.helloworld.spring.DateTimeService" scope="request"/> -->
 

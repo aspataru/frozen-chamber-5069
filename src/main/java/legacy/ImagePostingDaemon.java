@@ -5,7 +5,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import lombok.RequiredArgsConstructor;
-import util.PostUtils;
 
 @RequiredArgsConstructor
 public class ImagePostingDaemon {
