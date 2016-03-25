@@ -9,10 +9,17 @@
   http://www.springframework.org/schema/context/spring-context.xsd"
         >
 
+	<bean id="imageDao" class="dao.ImageDAOImpl">
+		<constructor-arg name="mongoUri" value="#{ T(java.lang.System).getenv('MONGOLAB_URI')}"/>
+		<constructor-arg name="dbString" value="heroku_kk6rc05p"/>
+		<constructor-arg name="gridFSNamespace" value="img"/>
+	</bean>
+	
+	<bean class="services.ImageServiceImpl">
+		<constructor-arg name="imageDao" ref="imageDao"/>
+	</bean>
 	
 	<bean class="services.StatusServiceImpl"/>
-	
-	<bean class="services.ImageServiceImpl"/>
 
 <!--     <bean class="org.glassfish.jersey.examples.helloworld.spring.DateTimeService" scope="request"/> -->
 

@@ -45,4 +45,29 @@ public class ImageResource {
 
 	}
 
+	@GET
+	@Path("/rec/on")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response recOn() {
+		imageService.startRecording();
+
+		return Response.status(200).entity(imageService.isRecording()).build();
+	}
+
+	@GET
+	@Path("/rec/off")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response recOff() {
+		imageService.stopRecording();
+
+		return Response.status(200).entity(imageService.isRecording()).build();
+	}
+
+	@GET
+	@Path("/rec")
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response rec() {
+		return Response.status(200).entity(imageService.isRecording()).build();
+	}
+
 }
