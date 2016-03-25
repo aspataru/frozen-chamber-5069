@@ -1,6 +1,8 @@
 package resources;
 
+import java.io.File;
 import java.io.InputStream;
+import java.util.Optional;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -27,8 +29,14 @@ public class ImageResource {
 	@Path("/download")
 	@Produces("image/jpeg")
 	public Response getFile() {
-		ResponseBuilder response = Response.ok(imageService.retrieveSimpleFile());
-		response.header("Content-Disposition", "attachment; filename=pic.jpg");
+		Optional<File> fileOptional = imageService.retrieveSimpleFile();
+		ResponseBuilder response = null;
+		if (fileOptional.isPresent()) {
+			response = Response.ok(fileOptional.get());
+			response.header("Content-Disposition", "attachment; filename=pic.jpg");
+		} else {
+			response = Response.noContent();
+		}
 
 		return response.build();
 	}

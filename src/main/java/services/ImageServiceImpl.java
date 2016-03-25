@@ -4,6 +4,7 @@ import static util.FileUtils.writeToFile;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import dao.ImageDAO;
@@ -21,9 +22,12 @@ public class ImageServiceImpl implements ImageService {
 	private final ImageDAO imageDao;
 
 	@Override
-	public File retrieveSimpleFile() {
-		// TODO be polite when there is no file
-		return new File(FILE_PATH);
+	public Optional<File> retrieveSimpleFile() {
+		File imageFile = new File(FILE_PATH);
+		if (imageFile.exists()) {
+			return Optional.of(imageFile);
+		}
+		return Optional.empty();
 	}
 
 	@Override

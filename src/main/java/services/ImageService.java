@@ -2,10 +2,11 @@ package services;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Optional;
 
 public interface ImageService {
 
-	File retrieveSimpleFile();
+	Optional<File> retrieveSimpleFile();
 
 	void storeSimpleFile(InputStream inputStream);
 
