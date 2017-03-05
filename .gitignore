@@ -2,3 +2,5 @@
 .project
 .settings/
 target/
+.idea/
+/parapi-server.iml
